@@ -23,6 +23,7 @@
       ++x;
       for (let i = 1; i < (len - x); i++) {
         if (r[i-1] > r[i]) {
+          console.log(r[i-1], r[i])
           r = swap(r, i-1, i);
           swapped = true;
         }
