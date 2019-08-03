@@ -11,26 +11,52 @@ const assert = require('assert');
  * @param a Array<number>
  * @return Array<number>
  */
-function solution(a) {
+function solution(a) { // [3, 6, 2, 4, 5] 720 /
     const a_len = a.length;
-    let cumulative_product = [];
-    const total_product = a.reduce((acc, v, idx) => {
-        acc = idx === 0 ? v : acc * v;
-        cumulative_product.push(idx === 0 ? v : cumulative_product[idx-1] * v);
-        return acc;
-    }, 0);
+
+    let acc_r = [],
+        result_r = [];
 
     for (let i = 0; i < a_len; i++) {
-        const cum_val = cumulative_product[i-1] * a[i+1];
+        acc_r.push(
+            Array.prototype.concat(a.slice(0,i), a.slice(i+1))
+        );
     }
 
-    // tbd
+    for (let i = 0; i < a_len; i++) {
+        result_r.push(
+            eval(acc_r[i].join('*')) // 00ps!
+        );
+    }
+
+    return result_r;
 }
+
+// function solutionB(a) { // [3, 6, 2, 4, 5] 720 /
+//     const a_len = a.length;
+//
+//     let acc_r = [],
+//         result_r = [];
+//
+//     for (let i = 0; i < a_len; i++) {
+//         acc_r.push(
+//             Array.prototype.concat(a.slice(0,i), a.slice(i+1))
+//         );
+//     }
+//
+//     for (let i = 0; i < a_len; i++) {
+//         result_r.push(
+//             (new Function(`const acc_r=[${acc_r[i]}];let v=1;for(let i=0;i<${a_len-1};i++){v*=acc_r[i]}return v;`))()
+//         );
+//     }
+//
+//     return result_r;
+// }
 
 try {
-    // assert.deepStrictEqual(solution([3, 6, 2, 4, 5]), [240, 120, 360, 180, 138]);
-    // assert.deepStrictEqual(solution([3, 2, 1]), [2, 3, 6]);
+    assert.deepStrictEqual(solution([3, 6, 2, 4, 5]), [240, 120, 360, 180, 144], 'solution failed 1');
+    assert.deepStrictEqual(solution([3, 2, 1]), [2, 3, 6], 'solution failed 2');
+    console.log('\x1b[32m', 'solution OK', '\x1b[0m');
 } catch (e) {
-
+    console.error('\x1b[31m', e.message, '\x1b[0m');
 }
-
