@@ -14,44 +14,18 @@ const assert = require('assert');
 function solution(a) { // [3, 6, 2, 4, 5] 720 /
     const a_len = a.length;
 
-    let acc_r = [],
-        result_r = [];
+    let acc_r = [];
 
     for (let i = 0; i < a_len; i++) {
         acc_r.push(
-            Array.prototype.concat(a.slice(0,i), a.slice(i+1))
+            eval(
+                Array.prototype.concat(a.slice(0,i), a.slice(i+1)).join('*')
+            ) // still 00ps )
         );
     }
 
-    for (let i = 0; i < a_len; i++) {
-        result_r.push(
-            eval(acc_r[i].join('*')) // 00ps!
-        );
-    }
-
-    return result_r;
+    return acc_r;
 }
-
-// function solutionB(a) { // [3, 6, 2, 4, 5] 720 /
-//     const a_len = a.length;
-//
-//     let acc_r = [],
-//         result_r = [];
-//
-//     for (let i = 0; i < a_len; i++) {
-//         acc_r.push(
-//             Array.prototype.concat(a.slice(0,i), a.slice(i+1))
-//         );
-//     }
-//
-//     for (let i = 0; i < a_len; i++) {
-//         result_r.push(
-//             (new Function(`const acc_r=[${acc_r[i]}];let v=1;for(let i=0;i<${a_len-1};i++){v*=acc_r[i]}return v;`))()
-//         );
-//     }
-//
-//     return result_r;
-// }
 
 try {
     assert.deepStrictEqual(solution([3, 6, 2, 4, 5]), [240, 120, 360, 180, 144], 'solution failed 1');
