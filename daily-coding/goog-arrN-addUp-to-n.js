@@ -1,3 +1,5 @@
+const assert = require('assert').strict;
+
 /**
  * source: Google
  * Given a list of numbers and a number k,
@@ -35,6 +37,14 @@ function solution(a, k) {
     return false;
 }
 
-console.log(
-  solution([102, 298, 2819, 28, 183, 28, 183, 455, 33, 1, 5, 20, 280, 988], 400)
-);
+try {
+    assert.deepStrictEqual(
+        solution([102, 298, 2819, 28, 183, 28, 183, 455, 33, 1, 5, 20, 280, 988], 400),
+        true,
+        'wrong solution'
+    );
+    console.log('\x1b[32m', 'solution OK');
+} catch (e) {
+    console.error('\x1b[31m', e.message);
+}
+
