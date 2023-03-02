@@ -12,26 +12,14 @@ const assert = require('assert').strict;
  */
 function solution(a, k) {
     const a_len = a.length;
-    let addupObj = {},
-        diff;
     
     if (a_len < 2) {
         return false;
     }
     
     for (let i = 0; i < a_len; i++) {
-        diff = k - a[i];
-        
-        if (diff < 0) {
-            continue;
-        }
-
-        if (addupObj['' +a[i]] >= 0) {
-            console.log(`${a[addupObj[a[i]]]} + ${a[i]} = ${k}`);
-            return true;
-        }
-        
-        addupObj[diff] = i;
+        const diff = k - a[i]
+        if (a.includes(diff)) return true; 
     }
 
     return false;
