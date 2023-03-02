@@ -36,9 +36,34 @@ function solution(a) {
     }
 }
 
+// the largest sum of 2 non-adjacent numbers.
+function solution2(r) {
+    const len = r.length
+    if (len <= 2) return NaN
+    if (len === 3) return r[0] + r[2]
+    
+    let max;
+    for (let i = 0, i < len - 2, i++) {
+        const sum1 = r[i] + r[i+2];
+        const sum2 = r[i+1] + (r[i+3] ? r[i+3] : 0);
+        const qt = Math.max(sum1, sum2);
+        if (qt > max) max = qt;
+    }
+    return max;
+}
+
+// sum of non-adjacent nums
+function solution3(r) {
+    let max = r[0] + r[2];
+    for (i=1; len = r.length - 2, i < len; i++) {
+        max += r[i] + r[i+2];
+    }
+    return max;
+}
+
 try {
     assert.deepStrictEqual(
-        solution([2, 4, 6, 2, 5, 8, 4, 10, 21, 9, 4, 6, 3]),
+        solution([2, 4, 6, 2, 5, 8, 4, 10, 21, 9, 5, 6, 3, 8]),
         45,
         'wrong solution'
     );
